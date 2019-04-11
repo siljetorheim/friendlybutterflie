@@ -23,6 +23,10 @@ body {
 }
 
 .topnav a.active {
-  background-color: #000000;
+  background: #000000;
   color: white;
+}
+
+.hide {
+  display: none;
 }
