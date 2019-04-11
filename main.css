@@ -21,7 +21,13 @@
   font-size: 17px;
 }
 
-
+.box {
+  background-color: white;
+  width: 300px;
+  border: 1px solid black;
+  padding: 5px;
+  margin: 15px;
+}
 .topnav button:hover {
   background-color: #ddd;
   color: black;
@@ -46,6 +52,8 @@
   width: 100%;
   height: 70px;
 }
+
+
 
 .text_footer {
   display: flex;
