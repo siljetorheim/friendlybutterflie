@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="main.css">
+<script type="text/javascript" src="master.js"></script>
 </head>
 <body class="body">
 
 <div class="topnav">
-  <a class="active" href="#introduksjon">Introduksjon</a>
-  <a href="#oversikt">Oversikt</a>
-  <a href="#detaljer">Detaljer</a>
-  <a href="#sammenligning">Sammenligning</a>
+  <button onclick="intro()">Introduksjon</button>
+  <button onclick="oversikt()">Oversikt</button>
+  <button onclick="detaljer()">Detaljer</button>
+  <button onclick="sammenligning()">Sammenligning</button>
 </div>
 
-<div style="padding-left:16px">
-  <h2>Top Navigation Example</h2>
-  <p>Some content..</p>
-</div>
+<div id="intro">Introduksjon</div>
 
+<div id="oversikt">Oversikt</div>
 
-<footer id="red">
-  <h4 class="text_footer"> Oppgavebesvarelse INFO134</h4>
+<div id="details">Detaljer</div>
+
+<div id="sammenligning">Sammenligning</div>
+
+<footer id="footer">
+  <h4 class="text_footer">Oppgavebesvarelse INFO134</h4>
 </footer>
-
-
 
 </body>
 </html>
