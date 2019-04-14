@@ -28,7 +28,19 @@ function lastNed0() {
       var obj = JSON.parse(xhr.responseText);
       var obj1 = xhr.responseText
       console.log(obj["elementer"]);
-      document.getElementById("utdanning").innerHTML = obj1;
+
+      let working_elem = document.getElementById("utdanning");
+
+      //Insert liste
+      working_elem.innerHTML += "<ul>"
+
+      for (outpt in obj["elementer"]){
+        working_elem.innerHTML += "<li>" + outpt + "</li>";
+      }
+
+      //Stop liste
+      working_elem.innerHTML += "</ul>"
+
     }
   };
   xhr.send();
