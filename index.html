@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="main.css">
-<script type="text/javascript" src="master.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="main.css">
+  <script type="text/javascript" src="master.js"></script>
 </head>
 <body class="body">
 
@@ -20,20 +20,30 @@
   <p>Her står en beskrivelse av oppgaven</p></div>
   <div class="box">
     <p>Her kan du finne alle lenkene som er brukt til oppgaven:</p>
-  <a href="http://data.ssb.no/api/v0/dataset/104857?lang=no">• Befolkning</a></br>
-  <a href ="http://data.ssb.no/api/v0/dataset/100145?lang=no">• Sysselsatte</a></br>
-  <a href="http://data.ssb.no/api/v0/dataset/85432?lang=no">• Utdanningsnivå</a></br>
+  <a href="http://data.ssb.no/api/v0/dataset/104857?lang=no"> Befolkning</a></br>
+  <a href ="http://data.ssb.no/api/v0/dataset/100145?lang=no"> Sysselsatte</a></br>
+  <a href="http://data.ssb.no/api/v0/dataset/85432?lang=no"> Utdanningsnivå</a></br>
   <p>NB! Noen av dataene kan inneholde feil.</p></div>
 </div>
 
 <div id="oversikt">
-  <p>Oversikt</p>
+  <h3>Oversikt</h3>
   <div id="utdanning"></div>
+  <p>Se alle kommunene her:</p>
 </div>
 
-<div id="detaljer">Detaljer</div>
+<div id="detaljer">
+  <h3>Detaljer</h3>
+  <input id="kommune">
+  <button onclick="hent_detj_kommune">Hent detaljer</button>
+</div>
 
-<div id="sammenligning">Sammenligning</div>
+<div id="sammenligning">
+  <h3>Sammenligning</h3>
+  <input id="kommune_1">
+  <input id="kommune_2">
+  <button onclick="sammenlign_kommune">Sammenlign</button>
+</div>
 
 <div id="page-container">
   <div id="content-wrap">
