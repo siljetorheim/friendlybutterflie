@@ -16,7 +16,7 @@ let befolkning = "http://wildboy.uib.no/~tpe056/folk/104857.json"
 let sysselsatte = "http://wildboy.uib.no/~tpe056/folk/100145.json"
 let utdanning = "http://wildboy.uib.no/~tpe056/folk/85432.json"
 
-var url = "http://wildboy.uib.no/~tpe056/folk/85432.json";
+var url = "http://wildboy.uib.no/~tpe056/folk/100145.json";
 
 function lastNed0() {
   var xhr = new XMLHttpRequest();
@@ -25,8 +25,8 @@ function lastNed0() {
     if (xhr.readyState === 4 && xhr.status === 200) {
       var obj = JSON.parse(xhr.responseText);
       var obj1 = xhr.responseText
-      console.log(obj);
-      //document.getElementById("demo").innerHTML = obj1;
+      console.log(obj["elementer"]);
+      document.getElementById("utdanning").innerHTML = obj1;
     }
   };
   xhr.send();
