@@ -37,6 +37,12 @@ function lastNed0() {
 }
 window.onload = lastNed0;
 
+function hent_detj_kommune() {
+  var info = document.getElementById("kommune").value
+  return info
+  console.log(info);
+}
+
 /*getNames funksjonen. Skal returnere listen av alle kommunenavnene.*/
 /*function getNames()  {
   var xhr = new XMLHttpRequest();

@@ -44,6 +44,55 @@
   color: white;
 }
 
+#oversikt {
+  padding: 15px;
+}
+
+#detaljer {
+  padding: 15px;
+}
+
+#detaljer button {
+  background-color: #333;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 6px;
+}
+
+#kommune {
+  background-color: white;
+  width: 400px;
+  height: flex;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+#sammenligning {
+  padding: 15px;
+}
+
+#sammenligning button {
+  background-color: #333;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 6px;
+}
+
+#kommune_1 {
+  background-color: white;
+  width: 400px;
+  height: flex;
+  border: 1px solid black;
+  padding: 5px;
+}
+#kommune_2 {
+  background-color: white;
+  width: 400px;
+  height: flex;
+  border: 1px solid black;
+  padding: 5px;
+  margin-top: 10px;
+}
 
 #page-container {
   position: relative;
