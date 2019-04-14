@@ -1,3 +1,4 @@
+//HTML topp navigasjons feltet.
 function getInfo(id) {
   return document.getElementById(id)
 }
@@ -11,6 +12,7 @@ function hide(tall) {
   }
 }
 
+//URL til JSON filene
 let beskrivelser = "http://wildboy.uib.no/~tpe056/folk/"
 let befolkning = "http://wildboy.uib.no/~tpe056/folk/104857.json"
 let sysselsatte = "http://wildboy.uib.no/~tpe056/folk/100145.json"
@@ -32,3 +34,26 @@ function lastNed0() {
   xhr.send();
 }
 window.onload = lastNed0;
+
+/*getNames funksjonen. Skal returnere listen av alle kommunenavnene.*/
+/*function getNames()  {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", befolkning);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      var obj = JSON.parse(xhr.responseText);
+      var obj1 = xhr.responseText
+      console.log(obj);
+      document.getElementById("oversikt").innerHTML = obj1;
+//Finne elementer
+    }
+  };
+  xhr.send();
+}
+
+window.onload = getNames;
+
+/*getIDs returnerer listen av alle kommunenummerene.*/
+
+/*getInfo tar kommunenummerene som argument og returnerer informasjonen om denne
+kommunen fra datasettet. */
