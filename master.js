@@ -22,46 +22,34 @@ let utdanning = "http://wildboy.uib.no/~tpe056/folk/85432.json"
 
 var url = "http://wildboy.uib.no/~tpe056/folk/100145.json";
 
-function lastNed0() {
+//getNames - Returnere alle kommunenavnene.
+
+function getNames() {
   var xhr = new XMLHttpRequest();
   xhr.open("GET", url);
   xhr.onreadystatechange = function() {
     if (xhr.readyState === 4 && xhr.status === 200) {
       var obj = JSON.parse(xhr.responseText);
       var obj1 = xhr.responseText
-      console.log(Object.values(obj)[0]);
-      //document.getElementById("utdanning").innerHTML = obj1;
+
+      let working_elem = document.getElementById("kommune_liste");
+
+      for (outpt in obj["elementer"]){
+        working_elem.innerHTML += "<option value='" + outpt + "'>" + outpt + "</option>"
+      }
+
     }
   };
   xhr.send();
 }
-window.onload = lastNed0;
-
-function hent_detj_kommune() {
-  var info = document.getElementById("kommune").value
-  return info
-  console.log(info);
-}
-
-/*getNames funksjonen. Skal returnere listen av alle kommunenavnene.*/
-/*function getNames()  {
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", befolkning);
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      var obj = JSON.parse(xhr.responseText);
-      var obj1 = xhr.responseText
-      console.log(obj);
-      document.getElementById("oversikt").innerHTML = obj1;
-//Finne elementer
-    }
-  };
-  xhr.send();
-}
-
 window.onload = getNames;
 
 /*getIDs returnerer listen av alle kommunenummerene.*/
+function getIDs() {
 
+}
 /*getInfo tar kommunenummerene som argument og returnerer informasjonen om denne
 kommunen fra datasettet. */
+function getInfo(kommuenummer) {
+  
+}
