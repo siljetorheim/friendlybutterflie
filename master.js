@@ -21,7 +21,7 @@ let utdanning = "http://wildboy.uib.no/~tpe056/folk/85432.json"
 
 var url = "http://wildboy.uib.no/~tpe056/folk/100145.json";
 
-//getNames - Returnere alle kommunenavnene. 
+//getNames - Returnere alle kommunenavnene.
 
 function getNames() {
   var xhr = new XMLHttpRequest();
@@ -30,13 +30,16 @@ function getNames() {
     if (xhr.readyState === 4 && xhr.status === 200) {
       var obj = JSON.parse(xhr.responseText);
       var obj1 = xhr.responseText
-      console.log(obj["elementer"]);
+      //console.log(obj["elementer"]);
 
       let working_elem = document.getElementById("kommune_liste");
 
       for (outpt in obj["elementer"]){
         working_elem.innerHTML += "<option value='" + outpt + "'>" + outpt + "</option>"
+
       }
+      console.log(working_elem)
+
 
     }
   };
