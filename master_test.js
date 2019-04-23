@@ -1,20 +1,22 @@
 
 //The links with the data
 let beskrivelser = "http://wildboy.uib.no/~tpe056/folk/"
-let befolkning = "http://wildboy.uib.no/~tpe056/folk/104857.json"
-let sysselsatte = "http://wildboy.uib.no/~tpe056/folk/100145.json"
-let utdanning = "http://wildboy.uib.no/~tpe056/folk/85432.json"
+let befolkning_2 = "http://wildboy.uib.no/~tpe056/folk/104857.json"
+let sysselsatte_2 = "http://wildboy.uib.no/~tpe056/folk/100145.json"
+let utdanning_2 = "http://wildboy.uib.no/~tpe056/folk/85432.json"
 
 //Gets the data from the link
-function getData(url, callback) {
+function getData(url, data, callback) {
   var xhr = new XMLHttpRequest();
-  console.log('url', url);
   xhr.open("GET", url);
   xhr.onreadystatechange = function() {
     if (xhr.readyState === 4 && xhr.status === 200) {
-      var data = JSON.parse(xhr.responseText);
+      var info = JSON.parse(xhr.responseText);
+      data.datasett = info
 
-      callback(data);
+      if (callback) {
+        callback();
+      }
 
     };
   }
@@ -22,11 +24,7 @@ function getData(url, callback) {
 }
 
 //Gets the names from the link
-function getNames() {
-  var url = utdanning;
-  console.log(url);
-  getData(url, function(obj){
-    console.log('test', obj["elementer"]);
+function getNames(obj) {
     let working_elem = document.getElementById("utdanning");
 
     //Insert liste
@@ -37,32 +35,36 @@ function getNames() {
 
     //Stop liste
     working_elem.innerHTML += "</ul>"
-
-  })
 }
-
-//testing av mapping
-/*var mapping {
-  "0101" : "Halden"
-}*/
 
 
 //Gets the kommunenummer from the links
-function getIDs(){
+function getIDs(data){
   var kommunenumre = [];
-  var data = getData(utdanning, function (data) {
     for (kommune in data.elementer) {
       kommunenumre.push(data.elementer[kommune].kommunenummer);
-//testing
-      /*if (data.elementer[kommune].kommunenummer == '0101') {
-        console.log(data.elementer[kommune]);
-      }*/
     }
     console.log(kommunenumre);
-  });
+
 }
 
 //Gets information about the kommuner
 function getInfo(){
 
+}
+
+function Grensesnitt(url) {
+  this.url = url;
+  this.getNames = function() {getNames(this.datasett)}
+  this.getIDs = function() {getIDs(this.datasett)}
+  this.load = function() {getData(this.url, this)}
+}
+var utdanning = new Grensesnitt(utdanning_2)
+var sysselsatte = new Grensesnitt(sysselsatte_2)
+var befolkning = new Grensesnitt(befolkning_2)
+
+function load() {
+  befolkning.load()
+  sysselsatte.load()
+  utdanning.load()
 }
