@@ -6,6 +6,10 @@
   flex-direction: column;
 }
 
+.hide {
+  display: none;
+}
+
 .topnav {
   overflow: hidden;
   background-color: #333;

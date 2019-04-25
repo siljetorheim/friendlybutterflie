@@ -1,16 +1,17 @@
 //Hides the pages not in use
-/*function getInfo(id) {
+function hide_info(id) {
   return document.getElementById(id)
 }
+
 function hide(tall) {
-  let liste = [getInfo("introduksjon"), getInfo("oversikt"), getInfo("detaljer"), getInfo("sammenligning")]
+  let liste = [hide_info("introduksjon"), hide_info("oversikt"), hide_info("detaljer"), hide_info("sammenligning")]
   for (var i = 0; i < liste.length; i++) {
     liste[i].className = "hide"
   }
   if (tall != undefined) {
     liste[tall].className = "active"
   }
-}*/
+}
 
 //The links with the data
 let beskrivelser = "http://wildboy.uib.no/~tpe056/folk/"
@@ -57,6 +58,14 @@ function getIDs(data){
 
 }
 
+function hent_detj_kommune(iden) {
+  return document.getElementById(iden).value
+}
+
+function detaljer() {
+  return hent_detj_kommune("kommune") //Må legge inn conditional statement for å forhindre ugyldig kommunenr og tekstverdi
+}
+
 //Gets information about the kommuner
 function getInfo(data, kommunenr){
 
@@ -82,52 +91,10 @@ function Grensesnitt(url) {
   this.getNames = function() {getNames(this.datasett)}
   this.getIDs = function() {getIDs(this.datasett)}
   this.load = function() {getData(this.url, this)}
-  this.getInfo = function() {getInfo(this.datasett, kommunenummer)}
+  this.getInfo = function() {getInfo(this.datasett, detaljer())} //Burde være annerledes, svarer ikke helt på oppgaven
 }
 var utdanning = new Grensesnitt(utdanning_2)
 var sysselsatte = new Grensesnitt(sysselsatte_2)
 var befolkning = new Grensesnitt(befolkning_2)
 
-befolkning.getInfo(this.datasett, xxxxx)
-
-
-
-
-
-
-
-//GAMLE KODEN
-/*//URL til JSON filene
-let beskrivelser = "http://wildboy.uib.no/~tpe056/folk/"
-let befolkning = "http://wildboy.uib.no/~tpe056/folk/104857.json"
-let sysselsatte = "http://wildboy.uib.no/~tpe056/folk/100145.json"
-let utdanning = "http://wildboy.uib.no/~tpe056/folk/85432.json"
-
-var url = "http://wildboy.uib.no/~tpe056/folk/100145.json";
-
-//getNames - Returnere alle kommunenavnene.
-
-function getNames() {
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", url);
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      var obj = JSON.parse(xhr.responseText);
-      var obj1 = xhr.responseText
-      //console.log(obj["elementer"]);
-
-      let working_elem = document.getElementById("kommune_liste");
-
-      for (outpt in obj["elementer"]){
-        working_elem.innerHTML += "<option value='" + outpt + "'>" + outpt + "</option>"
-
-      }
-      console.log(working_elem)
-
-
-    }
-  };
-  xhr.send();
-}
-window.onload = getNames;
-*/
+befolkning.getInfo(this.datasett, document.getElementById("kommune"))
