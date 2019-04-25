@@ -2,6 +2,7 @@
 function hide_info(id) {
   return document.getElementById(id)
 }
+
 function hide(tall) {
   let liste = [hide_info("introduksjon"), hide_info("oversikt"), hide_info("detaljer"), hide_info("sammenligning")]
   for (var i = 0; i < liste.length; i++) {
@@ -58,6 +59,14 @@ function getIDs(data){
 
 }
 
+function hent_detj_kommune(iden) {
+  return document.getElementById(iden).value
+}
+
+function detaljer() {
+  return hent_detj_kommune("kommune") //Må legge inn conditional statement for å forhindre ugyldig kommunenr og tekstverdi
+}
+
 //Gets information about the kommuner
 function getInfo(data, kommunenr){
 
@@ -83,8 +92,13 @@ function Grensesnitt(url) {
   this.getNames = function() {getNames(this.datasett)}
   this.getIDs = function() {getIDs(this.datasett)}
   this.load = function() {getData(this.url, this)}
-  this.getInfo = function() {getInfo(this.datasett, kommunenummer)}
+  this.getInfo = function() {getInfo(this.datasett, detaljer())} //Burde være annerledes, svarer ikke helt på oppgaven
 }
 var utdanning = new Grensesnitt(utdanning_2)
 var sysselsatte = new Grensesnitt(sysselsatte_2)
 var befolkning = new Grensesnitt(befolkning_2)
+<<<<<<< HEAD
+=======
+
+befolkning.getInfo(this.datasett, document.getElementById("kommune"))
+>>>>>>> f9b30207c5b16f0539b4741e1314eb46470d0043

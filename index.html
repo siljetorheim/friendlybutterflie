@@ -9,10 +9,17 @@
 <body class="body" onload="load(); hide(0);">
 
 <div class="topnav">
+<<<<<<< HEAD
   <button onclick="hide(0);">Introduksjon</button>
   <button onclick="hide(1);">Oversikt</button>
   <button onclick="hide(2);">Detaljer</button>
   <button onclick="hide(3);">Sammenligning</button>
+=======
+  <button onclick="hide(0)">Introduksjon</button>
+  <button onclick="hide(1)">Oversikt</button>
+  <button onclick="hide(2)">Detaljer</button>
+  <button onclick="hide(3)">Sammenligning</button>
+>>>>>>> f9b30207c5b16f0539b4741e1314eb46470d0043
 </div>
 
 <div id="introduksjon">
@@ -29,14 +36,13 @@
 <div id="oversikt">
   <h3>Oversikt</h3>
   <div id="utdanning"></div>
-  <p>Se alle kommunene her:</p>
-  <select name="kommune" id="kommune_liste"></select>
+  <p>Her finner du en oversikt over alle kommunene med navn, kommunenummer og siste måling av total befolkning.</p>
 </div>
 
 <div id="detaljer">
   <h3>Detaljer</h3>
   <input id="kommune">
-  <button onclick="hent_detj_kommune()">Hent detaljer</button>
+  <button onclick="detaljer()">Hent detaljer</button>
 </div>
 
 <div id="sammenligning">
