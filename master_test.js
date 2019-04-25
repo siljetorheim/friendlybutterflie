@@ -1,3 +1,17 @@
+//Hides the pages not in use
+function hide_info(id) {
+  return document.getElementById(id)
+}
+
+function hide(tall) {
+  let liste = [hide_info("introduksjon"), hide_info("oversikt"), hide_info("detaljer"), hide_info("sammenligning")]
+  for (var i = 0; i < liste.length; i++) {
+    liste[i].className = "hide"
+  }
+  if (tall != undefined) {
+    liste[tall].className = "active"
+  }
+}
 
 //The links with the data
 let beskrivelser = "http://wildboy.uib.no/~tpe056/folk/"
@@ -24,17 +38,12 @@ function getData(url, data, callback) {
 }
 
 //Gets the names from the link
-function getNames(obj) {
-    let working_elem = document.getElementById("utdanning");
-
-    //Insert liste
-    working_elem.innerHTML += "<ul>" //+= betyr "adds a value to a variable."
-    for (outpt in obj["elementer"]){
-      working_elem.innerHTML += "<li>" + outpt + "</li>";
+function getNames(data) {
+  var kommunenavn = [];
+    for (kommune in data["elementer"]) {
+      kommunenavn.push(kommune)
     }
-
-    //Stop liste
-    working_elem.innerHTML += "</ul>"
+    console.log(kommunenavn);
 }
 
 
@@ -49,22 +58,53 @@ function getIDs(data){
 }
 
 //Gets information about the kommuner
-function getInfo(){
+function getInfo(data, kommunenr){
+  for (kommune in data.elementer) {
+    if (data.elementer[kommune].kommunenummer == kommunenr) {
+      console.log(data.elementer[kommune])
+      return data.elementer[kommune]
 
+    }
+  }
 }
 
+//Loads the datasett
+function load() {
+  befolkning.load()
+  sysselsatte.load()
+  utdanning.load()
+}
+
+//Konstruktør
 function Grensesnitt(url) {
   this.url = url;
   this.getNames = function() {getNames(this.datasett)}
   this.getIDs = function() {getIDs(this.datasett)}
   this.load = function() {getData(this.url, this)}
+  this.getInfo = function() {getInfo(this.datasett, detaljer())} //Burde være annerledes, svarer ikke helt på oppgaven
 }
 var utdanning = new Grensesnitt(utdanning_2)
 var sysselsatte = new Grensesnitt(sysselsatte_2)
 var befolkning = new Grensesnitt(befolkning_2)
 
-function load() {
-  befolkning.load()
-  sysselsatte.load()
-  utdanning.load()
+//test: befolkning.getInfo(this.datasett, document.getElementById("kommune"))
+
+//Gets info to the page Oversikt
+function heihei() {
+  let working_elem = document.getElementById("oversikt_kommune");
+  working_elem.innerHTML += "<ul>"
+  for (outpt in obj["elementer"]){
+    working_elem.innerHTML += "<li>" + outpt + "</li>";
+  }
+  working_elem.innerHTML += "</ul>"
+  console.log(outpt)
+}
+
+//Gets info to the page Detaljer
+function hent_detj_kommune(iden) {
+  return document.getElementById(iden).value
+}
+
+function detaljer() {
+  return hent_detj_kommune("kommune") //Må legge inn conditional statement for å forhindre ugyldig kommunenr og tekstverdi
 }

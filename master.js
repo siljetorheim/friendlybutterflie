@@ -38,16 +38,13 @@ function getData(url, data, callback) {
 }
 
 //Gets the names from the link
-function getNames(obj) {
-    let working_elem = document.getElementById("utdanning");
-    working_elem.innerHTML += "<ul>"
-    for (outpt in obj["elementer"]){
-      working_elem.innerHTML += "<li>" + outpt + "</li>";
+function getNames(data) {
+  var kommunenavn = [];
+    for (kommune in data["elementer"]) {
+      kommunenavn.push(kommune)
     }
-    working_elem.innerHTML += "</ul>"
-    console.log(outpt)
+    console.log(kommunenavn);
 }
-
 
 //Gets the kommunenummer from the links
 function getIDs(data){
@@ -57,14 +54,6 @@ function getIDs(data){
     }
     console.log(kommunenumre);
 
-}
-
-function hent_detj_kommune(iden) {
-  return document.getElementById(iden).value
-}
-
-function detaljer() {
-  return hent_detj_kommune("kommune") //Må legge inn conditional statement for å forhindre ugyldig kommunenr og tekstverdi
 }
 
 //Gets information about the kommuner
@@ -97,8 +86,21 @@ function Grensesnitt(url) {
 var utdanning = new Grensesnitt(utdanning_2)
 var sysselsatte = new Grensesnitt(sysselsatte_2)
 var befolkning = new Grensesnitt(befolkning_2)
-<<<<<<< HEAD
-=======
 
-befolkning.getInfo(this.datasett, document.getElementById("kommune"))
->>>>>>> f9b30207c5b16f0539b4741e1314eb46470d0043
+//test: befolkning.getInfo(this.datasett, document.getElementById("kommune"))
+
+//Gets info to the page Oversikt
+function oversikt() {
+
+
+}
+
+//Gets info to the page Detaljer
+function hent_detj_kommune(iden) {
+  return document.getElementById(iden).value
+
+}
+
+function detaljer() {
+  return hent_detj_kommune("kommune") //Må legge inn conditional statement for å forhindre ugyldig kommunenr og tekstverdi
+}
