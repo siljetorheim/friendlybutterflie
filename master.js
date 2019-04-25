@@ -58,8 +58,15 @@ function getIDs(data){
 }
 
 //Gets information about the kommuner
-function getInfo(){
+function getInfo(data, kommunenr){
 
+  for (kommune in data.elementer) {
+    if (data.elementer[kommune].kommunenummer == kommunenr) {
+      console.log(data.elementer[kommune])
+      return data.elementer[kommune]
+
+    }
+  }
 }
 
 //Loads the datasett
@@ -75,10 +82,13 @@ function Grensesnitt(url) {
   this.getNames = function() {getNames(this.datasett)}
   this.getIDs = function() {getIDs(this.datasett)}
   this.load = function() {getData(this.url, this)}
+  this.getInfo = function() {getInfo(this.datasett, kommunenummer)}
 }
 var utdanning = new Grensesnitt(utdanning_2)
 var sysselsatte = new Grensesnitt(sysselsatte_2)
 var befolkning = new Grensesnitt(befolkning_2)
+
+befolkning.getInfo(this.datasett, xxxxx)
 
 
 
