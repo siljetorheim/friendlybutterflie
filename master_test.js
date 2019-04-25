@@ -1,16 +1,3 @@
-//Hides the pages not in use
-function hide_info(id) {
-  return document.getElementById(id)
-}
-function hide(tall) {
-  let liste = [hide_info("introduksjon"), hide_info("oversikt"), hide_info("detaljer"), hide_info("sammenligning")]
-  for (var i = 0; i < liste.length; i++) {
-    liste[i].className = "hide"
-  }
-  if (tall != undefined) {
-    liste[tall].className = "active"
-  }
-}
 
 //The links with the data
 let beskrivelser = "http://wildboy.uib.no/~tpe056/folk/"
@@ -39,12 +26,15 @@ function getData(url, data, callback) {
 //Gets the names from the link
 function getNames(obj) {
     let working_elem = document.getElementById("utdanning");
-    working_elem.innerHTML += "<ul>"
+
+    //Insert liste
+    working_elem.innerHTML += "<ul>" //+= betyr "adds a value to a variable."
     for (outpt in obj["elementer"]){
       working_elem.innerHTML += "<li>" + outpt + "</li>";
     }
+
+    //Stop liste
     working_elem.innerHTML += "</ul>"
-    console.log(outpt)
 }
 
 
@@ -59,32 +49,22 @@ function getIDs(data){
 }
 
 //Gets information about the kommuner
-function getInfo(data, kommunenr){
+function getInfo(){
 
-  for (kommune in data.elementer) {
-    if (data.elementer[kommune].kommunenummer == kommunenr) {
-      console.log(data.elementer[kommune])
-      return data.elementer[kommune]
-
-    }
-  }
 }
 
-//Loads the datasett
-function load() {
-  befolkning.load()
-  sysselsatte.load()
-  utdanning.load()
-}
-
-//Konstruktør
 function Grensesnitt(url) {
   this.url = url;
   this.getNames = function() {getNames(this.datasett)}
   this.getIDs = function() {getIDs(this.datasett)}
   this.load = function() {getData(this.url, this)}
-  this.getInfo = function() {getInfo(this.datasett, kommunenummer)}
 }
 var utdanning = new Grensesnitt(utdanning_2)
 var sysselsatte = new Grensesnitt(sysselsatte_2)
 var befolkning = new Grensesnitt(befolkning_2)
+
+function load() {
+  befolkning.load()
+  sysselsatte.load()
+  utdanning.load()
+}
