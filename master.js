@@ -28,7 +28,7 @@ function getData(url, data, callback) {
       var info = JSON.parse(xhr.responseText);
       data.datasett = info
 
-      if (callback) {
+     if (callback) {
         callback();
       }
 
@@ -44,6 +44,7 @@ function getNames(data) {
       kommunenavn.push(kommune)
     }
     console.log(kommunenavn);
+  return kommunenavn;
 }
 
 //Gets the kommunenummer from the links
@@ -53,12 +54,12 @@ function getIDs(data){
       kommunenumre.push(data.elementer[kommune].kommunenummer);
     }
     console.log(kommunenumre);
+    return kommunenumre;
 
 }
 
 //Gets information about the kommuner
 function getInfo(data, kommunenr){
-
   for (kommune in data.elementer) {
     if (data.elementer[kommune].kommunenummer == kommunenr) {
       console.log(data.elementer[kommune])
@@ -68,31 +69,57 @@ function getInfo(data, kommunenr){
   }
 }
 
-//Loads the datasett
-function load() {
-  befolkning.load()
-  sysselsatte.load()
-  utdanning.load()
-}
+
 
 //Konstruktør
-function Grensesnitt(url) {
+function Grensesnitt(url, onload) {
   this.url = url;
   this.getNames = function() {getNames(this.datasett)}
   this.getIDs = function() {getIDs(this.datasett)}
-  this.load = function() {getData(this.url, this)}
+  this.load = function() {getData(this.url, this, this.onload)}
   this.getInfo = function() {getInfo(this.datasett, detaljer())} //Burde være annerledes, svarer ikke helt på oppgaven
+  this.onload = onload;
 }
-var utdanning = new Grensesnitt(utdanning_2)
-var sysselsatte = new Grensesnitt(sysselsatte_2)
-var befolkning = new Grensesnitt(befolkning_2)
+
+var befolkning = new Grensesnitt(befolkning_2, function(){sysselsatte.load()})
+var utdanning = new Grensesnitt(utdanning_2, function(){program()})
+var sysselsatte = new Grensesnitt(sysselsatte_2, function(){utdanning.load()})
+befolkning.load()
+//Til rapport: Lastet ned en etter en. Begynner med befolkning, gir nytt sysselsatte, så utdanning og til slutt laster den programmet ved hjelp av callbackfunksjonen.
+
+
+function program(){
+  
+  oversikt()
+
+}
 
 //test: befolkning.getInfo(this.datasett, document.getElementById("kommune"))
+function siste_måling(){
+  let måling = befolkning.datasett.elementer;
+  var måling_liste = [];
+
+  for (var kjønn in måling) {
+    måling_liste.push(måling[kjønn].Kvinner["2018"]+måling[kjønn].Menn["2018"])
+  }
+  return måling_liste
+}
 
 //Gets info to the page Oversikt
 function oversikt() {
+  //let data = getData(this.url);
+  let kommunenavnliste = getNames(befolkning.datasett);
+  let kommunenummer = getIDs(befolkning.datasett);
+  let måling = siste_måling();
 
+  let ut_oversikt = document.getElementById("ul");
 
+  for (var x in kommunenavnliste){
+    let li = document.createElement("li")
+    let text = document.createTextNode(kommunenavnliste[x] + " / " + kommunenummer[x] + " / " + måling[x])
+    li.appendChild(text)
+    ut_oversikt.appendChild(li)
+  }
 }
 
 //Gets info to the page Detaljer
