@@ -43,6 +43,7 @@ function getNames(data) {
     for (kommune in data.["elementer"]) {
       kommunenavn.push(kommune)
     }
+    console.log(kommunenavn);
   return kommunenavn;
 }
 
@@ -52,7 +53,9 @@ function getIDs(data){
     for (kommune in data.elementer) {
       kommunenumre.push(data.elementer[kommune].kommunenummer);
     }
+    console.log(kommunenumre);
     return kommunenumre;
+
 }
 
 //Gets information about the kommuner
@@ -61,9 +64,9 @@ function getInfo(data, kommunenr){
     if (data.elementer[kommune].kommunenummer == kommunenr) {
       console.log(data.elementer[kommune])
       return data.elementer[kommune]
+
     }
   }
-
 }
 
 
@@ -74,44 +77,24 @@ function Grensesnitt(url, onload) {
   this.getNames = function() {getNames(this.datasett)}
   this.getIDs = function() {getIDs(this.datasett)}
   this.load = function() {getData(this.url, this, this.onload)}
-  this.getInfo = function() {getInfo(this.datasett, detaljer())}
+  this.getInfo = function() {getInfo(this.datasett, detaljer())} //Burde være annerledes, svarer ikke helt på oppgaven
   this.onload = onload;
 }
 
-var befolkning = new Grensesnitt(befolkning_2, function(){sysselsatte.load()}) //Når befolkning er lastet ned, starter nedlasting for sysselsatte
-var utdanning = new Grensesnitt(utdanning_2, function(){program()}) //Når utdanning er lastet ned kjøres programmet med hjelp av callback-funksjonen
-var sysselsatte = new Grensesnitt(sysselsatte_2, function(){utdanning.load()}) //Når sysselsatte er lastet ned, starter nedlasting for utdanning
-befolkning.load() //Laster ned befolkning først.
+var befolkning = new Grensesnitt(befolkning_2, function(){sysselsatte.load()})
+var utdanning = new Grensesnitt(utdanning_2, function(){program()})
+var sysselsatte = new Grensesnitt(sysselsatte_2, function(){utdanning.load()})
+befolkning.load()
+//Til rapport: Lastet ned en etter en. Begynner med befolkning, gir nytt sysselsatte, så utdanning og til slutt laster den programmet ved hjelp av callbackfunksjonen.
 
 
 function program(){
-<<<<<<< HEAD
 
   oversikt()
-=======
-  //sammenligning();
-  oversikt();
-  detaljer();
+
 }
 
-//test: Finds the latest statistics of Sysselsatte
-function statistikk_sysselsatte() {
-  let statistikk = sysselsatte.datasett.elementer;
-  let statistikk_liste = [];
-  var liste = getNames(befolkning.datasett);
-  var bef = siste_måling()
-
-  for (var i = 0; i < liste.length; i++) {
-    let sysselsatte = statistikk[liste[i]]["Begge kjønn"]["2018"]
-    let antall_sysselsatte = bef[i]/100 * sysselsatte
-    statistikk_liste.push(sysselsatte, antall_sysselsatte);
-  }
->>>>>>> 70c68dc4ba9fe084b68dfe5f369a3645190149dd
-
-  return statistikk_liste
-}
-
-//Finds the latest count for both genders
+//test: befolkning.getInfo(this.datasett, document.getElementById("kommune"))
 function siste_måling(){
   let måling = befolkning.datasett.elementer;
   let måling_liste = [];
@@ -132,7 +115,7 @@ function oversikt() {
 
   for (var x in kommunenavnliste){
     let li = document.createElement("li")
-    let text = document.createTextNode(kommunenavnliste[x] + " | " + "Kommunenummer: " + kommunenummer[x] + " | " + "Siste måling: " + måling[x])
+    let text = document.createTextNode(kommunenavnliste[x] + " / " + kommunenummer[x] + " / " + måling[x])
     li.appendChild(text)
     ut_oversikt.appendChild(li)
   }
@@ -148,7 +131,7 @@ function oversikt() {
 PersonerProsent - Personer over 16år, prosent*/
 
 
-function høyere_utdanning(){
+/*function høyere_utdanning(){
   let utdanning_datasett = utdanning.datasett.elementer;
   let utdanning_liste = [];
 
@@ -156,7 +139,7 @@ function høyere_utdanning(){
     console.log(utdanning_datasett[variable].03a)
     å
   }
-}
+}*/
 
 //Gets info to the page Detaljer
 function hent_detj_kommune(iden) {
@@ -165,6 +148,5 @@ function hent_detj_kommune(iden) {
 }
 
 function detaljer() {
-  return hent_detj_kommune("kommune");
-  //if (hent_detj_kommune("kommune") != ) Må legge inn conditional statement for å forhindre ugyldig kommunenr og tekstverdi
+  return hent_detj_kommune("kommune") //Må legge inn conditional statement for å forhindre ugyldig kommunenr og tekstverdi
 }
