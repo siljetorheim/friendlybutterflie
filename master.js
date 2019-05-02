@@ -95,7 +95,7 @@ function statistikk_sysselsatte() {
   let statistikk = sysselsatte.datasett.elementer;
   let statistikk_liste = [];
   var liste = getNames(befolkning.datasett);
-  var bef = siste_måling()
+  var bef = siste_måling();
 
   for (var i = 0; i < liste.length; i++) {
     let sysselsatte = statistikk[liste[i]]["Begge kjønn"]["2018"]
@@ -104,6 +104,21 @@ function statistikk_sysselsatte() {
   }
 
   return statistikk_liste
+}
+
+function høyere_utdanning() {
+  let nivå = utdanning.datasett.elementer;
+  let utdanning_liste = [];
+  let bef = siste_måling();
+  let liste = getNames(befolkning.datasett);
+
+  for (var i = 0; i < liste.length; i++) {
+    prosent_utdanning = nivå[liste[i]]["03a"]["Kvinner"]["2017"] + nivå[liste[i]]["03a"]["Menn"]["2017"];
+    antall_utdanning = bef[i]/100 * prosent_utdanning;
+    console.log(prosent_utdanning, antall_utdanning);
+    utdanning_liste.push(prosent_utdanning, antall_utdanning);
+  }
+  return utdanning_liste
 }
 
 //Finds the latest count for both genders
