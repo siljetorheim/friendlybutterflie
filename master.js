@@ -40,7 +40,7 @@ function getData(url, data, callback) {
 //Gets the names from the link
 function getNames(data) {
   var kommunenavn = [];
-    for (kommune in data["elementer"]) {
+    for (kommune in data.["elementer"]) {
       kommunenavn.push(kommune)
     }
     console.log(kommunenavn);
@@ -89,7 +89,7 @@ befolkning.load()
 
 
 function program(){
-  
+
   oversikt()
 
 }
@@ -97,7 +97,7 @@ function program(){
 //test: befolkning.getInfo(this.datasett, document.getElementById("kommune"))
 function siste_måling(){
   let måling = befolkning.datasett.elementer;
-  var måling_liste = [];
+  let måling_liste = [];
 
   for (var kjønn in måling) {
     måling_liste.push(måling[kjønn].Kvinner["2018"]+måling[kjønn].Menn["2018"])
@@ -111,7 +111,6 @@ function oversikt() {
   let kommunenavnliste = getNames(befolkning.datasett);
   let kommunenummer = getIDs(befolkning.datasett);
   let måling = siste_måling();
-
   let ut_oversikt = document.getElementById("ul");
 
   for (var x in kommunenavnliste){
@@ -119,6 +118,26 @@ function oversikt() {
     let text = document.createTextNode(kommunenavnliste[x] + " / " + kommunenummer[x] + " / " + måling[x])
     li.appendChild(text)
     ut_oversikt.appendChild(li)
+  }
+}
+
+/*KODER:
+01 Grunnskolenivå
+02a Videregående skolenivå
+11 Fagskolenivå
+03a Universitets- og høyskolenivå, kort
+04a Universitets- og høyskolenivå, lang
+09a Uoppgitt eller ingen fullført utdanning
+PersonerProsent - Personer over 16år, prosent*/
+
+
+function høyere_utdanning(){
+  let utdanning_datasett = utdanning.datasett.elementer;
+  let utdanning_liste = [];
+
+  for (var variable in utdanning_datasett) {
+    console.log(utdanning_datasett[variable].03a)
+    å
   }
 }
 
