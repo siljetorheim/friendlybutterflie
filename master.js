@@ -40,7 +40,7 @@ function getData(url, data, callback) {
 //Gets the names from the link
 function getNames(data) {
   var kommunenavn = [];
-    for (kommune in data.["elementer"]) {
+    for (kommune in data["elementer"]) {
       kommunenavn.push(kommune)
     }
     console.log(kommunenavn);
@@ -89,12 +89,49 @@ befolkning.load()
 
 
 function program(){
-
   oversikt()
+}
+
+//test: Finds the latest statistics of Sysselsatte
+function statistikk_sysselsatte() {
+  let statistikk = sysselsatte.datasett.elementer;
+  let statistikk_liste = [];
+  var liste = getNames(befolkning.datasett);
+  var bef = siste_måling();
+
+  for (var i = 0; i < liste.length; i++) {
+    let sysselsatte = statistikk[liste[i]]["Begge kjønn"]["2018"]
+    let antall_sysselsatte = bef[i]/100 * sysselsatte
+    statistikk_liste.push(sysselsatte, antall_sysselsatte);
+  }
 
 }
 
-//test: befolkning.getInfo(this.datasett, document.getElementById("kommune"))
+/*KODER:
+01 Grunnskolenivå
+02a Videregående skolenivå
+11 Fagskolenivå
+03a Universitets- og høyskolenivå, kort
+04a Universitets- og høyskolenivå, lang
+09a Uoppgitt eller ingen fullført utdanning
+PersonerProsent - Personer over 16år, prosent*/
+
+function høyere_utdanning() {
+  let nivå = utdanning.datasett.elementer;
+  let utdanning_liste = [];
+  let bef = siste_måling();
+  let liste = getNames(befolkning.datasett);
+
+  for (var i = 0; i < liste.length; i++) {
+    prosent_utdanning = nivå[liste[i]]["03a"]["Kvinner"]["2017"] + nivå[liste[i]]["03a"]["Menn"]["2017"];
+    antall_utdanning = bef[i]/100 * prosent_utdanning;
+    console.log(prosent_utdanning, antall_utdanning);
+    utdanning_liste.push(prosent_utdanning, antall_utdanning);
+  }
+  return utdanning_liste
+}
+
+//Finds the latest count for both genders
 function siste_måling(){
   let måling = befolkning.datasett.elementer;
   let måling_liste = [];
@@ -120,26 +157,6 @@ function oversikt() {
     ut_oversikt.appendChild(li)
   }
 }
-
-/*KODER:
-01 Grunnskolenivå
-02a Videregående skolenivå
-11 Fagskolenivå
-03a Universitets- og høyskolenivå, kort
-04a Universitets- og høyskolenivå, lang
-09a Uoppgitt eller ingen fullført utdanning
-PersonerProsent - Personer over 16år, prosent*/
-
-
-/*function høyere_utdanning(){
-  let utdanning_datasett = utdanning.datasett.elementer;
-  let utdanning_liste = [];
-
-  for (var variable in utdanning_datasett) {
-    console.log(utdanning_datasett[variable].03a)
-    å
-  }
-}*/
 
 //Gets info to the page Detaljer
 function hent_detj_kommune(iden) {
