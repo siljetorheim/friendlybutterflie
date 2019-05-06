@@ -106,6 +106,7 @@ function statistikk_sysselsatte() {
   return statistikk_liste
 }
 
+//Ikke ferdig, får feilmelding
 function høyere_utdanning() {
   let nivå = utdanning.datasett.elementer;
   let utdanning_liste = [];
@@ -113,11 +114,19 @@ function høyere_utdanning() {
   let liste = getNames(befolkning.datasett);
 
   for (var i = 0; i < liste.length; i++) {
-    prosent_utdanning = nivå[liste[i]]["03a"]["Kvinner"]["2017"] + nivå[liste[i]]["03a"]["Menn"]["2017"];
-    antall_utdanning = bef[i]/100 * prosent_utdanning;
+    let prosent_utdanning = nivå[liste[i]]["03a"].Kvinner["2017"] + nivå[liste[i]]["03a"].Menn["2017"];
+    let antall_utdanning = bef[i]/100 * prosent_utdanning;
     console.log(prosent_utdanning, antall_utdanning);
-    utdanning_liste.push(prosent_utdanning, antall_utdanning);
+    utdanning_liste.push(prosent_utdanning, antall_utdanning)
+
+  if (nivå[liste[i]["03a"]] != undefined) {
+      utdanning_liste.push(prosent_utdanning, antall_utdanning);
   }
+
+  if (nivå[liste[i]["03a"]] == undefined) {
+    console.log("Feil i datasett");
+  }
+}
   return utdanning_liste
 }
 
@@ -127,7 +136,7 @@ function siste_måling(){
   var måling_liste = [];
 
   for (var kjønn in måling) {
-    måling_liste.push(måling[kjønn].Kvinner["2018"]+måling[kjønn].Menn["2018"])
+    måling_liste.push(måling[kjønn].Kvinner["2018"] + måling[kjønn].Menn["2018"])
   }
   return måling_liste
 }
