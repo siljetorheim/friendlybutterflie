@@ -324,7 +324,7 @@ function detaljer() {
 
  for (var x in høy_ut.liste_kvinner){
    let li = document.createElement("li")
-   let text = document.createTextNode(høy_ut.liste_kvinner[x].aarstall +": Antall utdanning: "+ høy_ut.liste_kvinner[x].antall_utdanning.toFixed(0)+" Prosent utdanning: "+høy_ut.liste_kvinner[x].pro_utdanning)
+   let text = document.createTextNode(høy_ut.liste_kvinner[x].aarstall +": Antall utdanning kort: "+ høy_ut.liste_kvinner[x].antall_utdanning.toFixed(0)+" Prosent utdanning kort: "+høy_ut.liste_kvinner[x].pro_utdanning)
    li.appendChild(text)
    ul_kvinner.appendChild(li)
  }
