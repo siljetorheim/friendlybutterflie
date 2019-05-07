@@ -54,7 +54,6 @@ function getNameKommune(data, kommunenr) {
   for (kommune in data.elementer) {
     if (data.elementer[kommune].kommunenummer == kommunenr) {
       return kommune
-
     }
   }
 }
@@ -141,7 +140,6 @@ function statistikk_sysselsatt(kommunenr) {
 }
 
 
-
 //-------------------Utdanning--------------------------------------------------------------------------------------
 //Finds the latest statistic for utdanning
 /*KODER:
@@ -172,21 +170,7 @@ function høyere_utdanning(kommunenr) {
 
   return {"sisteAarpro": sisteAarpro, "sisteAar": sisteAar, "liste_kvinner": nivå_liste_kvinner}
 
-  /*let nivå = utdanning.datasett.elementer;
-  let utdanning_liste = [];
-  let bef = siste_måling();
-  let liste = getNames(befolkning.datasett);
-
-  for (var i = 0; i < liste.length; i++) {
-    prosent_utdanning = nivå[liste[i]]["03a"]["Kvinner"]["2017"] + nivå[liste[i]]["03a"]["Menn"]["2017"];
-    antall_utdanning = bef[i]/100 * prosent_utdanning;
-    console.log(prosent_utdanning, antall_utdanning);
-    utdanning_liste.push(prosent_utdanning, antall_utdanning);
-  }
-  return utdanning_liste*/
 }
-
-
 
 //-------------------Siste måling--------------------------------------------------------------------------------------
 //Finds the latest count for both genders
@@ -195,7 +179,7 @@ function siste_måling(){
   let måling_liste = [];
 
   for (var kjønn in måling) {
-    måling_liste.push(måling[kjønn].Kvinner["2018"]+måling[kjønn].Menn["2018"])
+    måling_liste.push(måling[kjønn].Kvinner["2018"] + måling[kjønn].Menn["2018"])
   }
   return måling_liste
 }
@@ -222,6 +206,7 @@ function oversikt() {
   let kommunenummer = getIDs(befolkning.datasett);
   let måling = siste_måling();
   let ut_oversikt = document.getElementById("ul");
+
 
   for (var x in kommunenavnliste){
     let li = document.createElement("li")
@@ -338,7 +323,61 @@ function detaljer() {
 
 }
 
-
-
 //-------------------SAMMENLIGNING--------------------------------------------------------------------------------------
 //Gets info to the page sammenligning
+function sammenligning() {
+  document.getElementById("sammen_kvinner").innerHTML = ""
+  document.getElementById("sammen_menn").innerHTML= ""
+  document.getElementById("sammen_kvinner_to").innerHTML= ""
+  document.getElementById("sammen_menn_to").innerHTML= ""
+
+ const kommunenummer = hent_detj_kommune("kommune_1") //Må legge inn conditional statement for å forhindre ugyldig kommunenr og tekstverdi
+ const kommunenummer_to = hent_detj_kommune("kommune_2")
+ let statestikk_s = statistikk_sysselsatt(kommunenummer)
+ let statestikk_syssel = statistikk_sysselsatt(kommunenummer_to)
+
+ let ul_kvinner = document.getElementById("sammen_kvinner");
+ let ul_kvinner_to = document.getElementById("sammen_kvinner_to");
+ let ul_menn = document.getElementById("sammen_menn");
+ let ul_menn_to = document.getElementById("sammen_menn_to");
+
+ for (var x in statestikk_s.liste_kvinner){
+   let li = document.createElement("li")
+   let text = document.createTextNode(statestikk_s.liste_kvinner[x].aarstall +" Prosent sysselsatte: "+statestikk_s.liste_kvinner[x].pro_sysselsatt)
+   li.appendChild(text)
+   ul_kvinner.appendChild(li)
+ }
+ for (var x in statestikk_s.liste_menn){
+   let li = document.createElement("li")
+   let text = document.createTextNode(statestikk_s.liste_menn[x].aarstall +" Prosent sysselsatte: "+statestikk_s.liste_menn[x].pro_sysselsatt)
+   li.appendChild(text)
+   ul_menn.appendChild(li)
+ }
+ for (var x in statestikk_syssel.liste_kvinner){
+   let li = document.createElement("li")
+   let text = document.createTextNode(statestikk_syssel.liste_kvinner[x].aarstall +" Prosent sysselsatte: "+statestikk_syssel.liste_kvinner[x].pro_sysselsatt)
+   li.appendChild(text)
+   ul_kvinner_to.appendChild(li)
+ }
+ for (var x in statestikk_syssel.liste_menn){
+   let li = document.createElement("li")
+   let text = document.createTextNode(statestikk_syssel.liste_menn[x].aarstall +" Prosent sysselsatte: "+statestikk_syssel.liste_menn[x].pro_sysselsatt)
+   li.appendChild(text)
+   ul_menn_to.appendChild(li)
+ }
+
+ let navn_kommune = document.getElementById("navn_kommune");
+ let navn_kommune_to = document.getElementById("navn_kommune_to")
+
+//Kommunenavn
+ let kommunenavn = getNameKommune(befolkning.datasett, kommunenummer)
+ let kommunenavn_to = getNameKommune(befolkning.datasett, kommunenummer_to)
+ let linavn = document.createElement("row")
+ let linavn_to = document.createElement("row")
+ let textnavn = document.createTextNode(kommunenavn)
+ let textnavn_to = document.createTextNode(kommunenavn_to)
+ linavn.appendChild(textnavn)
+ linavn_to.appendChild(textnavn_to)
+ navn_kommune.appendChild(linavn)
+ navn_kommune_to.appendChild(linavn_to)
+}
