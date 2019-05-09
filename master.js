@@ -80,7 +80,6 @@ function getInfo(data, kommunenr){
 
 
 
-
 //-------------------Konstruktør--------------------------------------------------------------------------------------
 function Grensesnitt(url, onload) {
   this.url = url;
@@ -95,13 +94,10 @@ var befolkning = new Grensesnitt(befolkning_2, function(){sysselsatte.load()})
 var utdanning = new Grensesnitt(utdanning_2, function(){program()})
 var sysselsatte = new Grensesnitt(sysselsatte_2, function(){utdanning.load()})
 befolkning.load()
-//Til rapport: Lastet ned en etter en. Begynner med befolkning, gir nytt sysselsatte, så utdanning og til slutt laster den programmet ved hjelp av callbackfunksjonen.
-
 
 function program(){
   oversikt()
 }
-
 
 //-------------------Sysselsatte--------------------------------------------------------------------------------------
 //Finds the latest statistics of Sysselsatte
@@ -154,8 +150,10 @@ PersonerProsent - Personer over 16år, prosent*/
 function høyere_utdanning(kommunenr) {
   let nivå = getInfo(utdanning.datasett, kommunenr)
   let nivå_liste_beggekjønn = [];
-  let nivå_liste_kvinner = [];
-  let nivå_liste_menn = [];
+  let nivå_liste_kvinner_kort = [];
+  let nivå_liste_kvinner_lang = [];
+  let nivå_liste_menn_kort = [];
+  let nivå_liste_menn_lang = [];
   var bef = siste_måling_spes(kommunenr);
 
   const sisteAarpro = (nivå["03a"]["Menn"]["2017"]+nivå["03a"]["Kvinner"]["2017"]+nivå["04a"]["Menn"]["2017"]+nivå["04a"]["Kvinner"]["2017"])/4
@@ -164,11 +162,29 @@ function høyere_utdanning(kommunenr) {
   for (aarstall in nivå["03a"]["Kvinner"]) {
     let pro_utdanning = nivå["03a"]["Kvinner"][aarstall]
     let antall_utdanning = bef/100 * nivå["03a"]["Kvinner"][aarstall]
-    nivå_liste_kvinner.push({"aarstall": aarstall, "antall_utdanning": antall_utdanning, "pro_utdanning": pro_utdanning});
+    nivå_liste_kvinner_kort.push({"aarstall": aarstall, "antall_utdanning": antall_utdanning, "pro_utdanning": pro_utdanning});
+  }
+
+  for (aarstall in nivå["04a"]["Kvinner"]) {
+    let pro_utdanning = nivå["04a"]["Kvinner"][aarstall]
+    let antall_utdanning = bef/100 * nivå["03a"]["Kvinner"][aarstall]
+    nivå_liste_kvinner_lang.push({"aarstall": aarstall, "antall_utdanning": antall_utdanning, "pro_utdanning": pro_utdanning});
+  }
+
+  for (aarstall in nivå["03a"]["Menn"]) {
+    let pro_utdanning = nivå["03a"]["Menn"][aarstall]
+    let antall_utdanning = bef/100 * nivå["03a"]["Menn"][aarstall]
+    nivå_liste_menn_kort.push({"aarstall": aarstall, "antall_utdanning": antall_utdanning, "pro_utdanning": pro_utdanning});
+  }
+
+  for (aarstall in nivå["04a"]["Menn"]) {
+    let pro_utdanning = nivå["04a"]["Menn"][aarstall]
+    let antall_utdanning = bef/100 * nivå["03a"]["Menn"][aarstall]
+    nivå_liste_menn_lang.push({"aarstall": aarstall, "antall_utdanning": antall_utdanning, "pro_utdanning": pro_utdanning});
   }
 
 
-  return {"sisteAarpro": sisteAarpro, "sisteAar": sisteAar, "liste_kvinner": nivå_liste_kvinner}
+  return {"sisteAarpro": sisteAarpro, "sisteAar": sisteAar, "liste_kvinner_kort": nivå_liste_kvinner_kort, "liste_kvinner_lang": nivå_liste_kvinner_lang, "liste_menn_kort": nivå_liste_menn_kort, "liste_menn_lang": nivå_liste_menn_lang}
 
 }
 
@@ -279,7 +295,7 @@ function detaljer() {
 
 //Utdanning i prosent
  let liutp = document.createElement("li")
- let textutp = document.createTextNode("Gjennomsnitt høyere utdanning det siste året: " + høy_ut.sisteAarpro)
+ let textutp = document.createTextNode("Gjennomsnitt høyere utdanning det siste året: " + høy_ut.sisteAarpro.toFixed(0))
  liutp.appendChild(textutp)
  sisteAaret.appendChild(liutp)
 
@@ -307,9 +323,16 @@ function detaljer() {
    ul_kvinner.appendChild(li)
  }
 
- for (var x in høy_ut.liste_kvinner){
+ for (var x in høy_ut.liste_kvinner_kort){
    let li = document.createElement("li")
-   let text = document.createTextNode(høy_ut.liste_kvinner[x].aarstall +": Antall utdanning kort: "+ høy_ut.liste_kvinner[x].antall_utdanning.toFixed(0)+" Prosent utdanning kort: "+høy_ut.liste_kvinner[x].pro_utdanning)
+   let text = document.createTextNode(høy_ut.liste_kvinner_kort[x].aarstall +": Antall utdanning kort: "+ høy_ut.liste_kvinner_kort[x].antall_utdanning.toFixed(0)+" Prosent utdanning kort: "+høy_ut.liste_kvinner_kort[x].pro_utdanning)
+   li.appendChild(text)
+   ul_kvinner.appendChild(li)
+ }
+
+ for (var x in høy_ut.liste_kvinner_lang){
+   let li = document.createElement("li")
+   let text = document.createTextNode(høy_ut.liste_kvinner_lang[x].aarstall +": Antall utdanning lang: "+ høy_ut.liste_kvinner_lang[x].antall_utdanning.toFixed(0)+" Prosent utdanning lang: "+høy_ut.liste_kvinner_lang[x].pro_utdanning)
    li.appendChild(text)
    ul_kvinner.appendChild(li)
  }
@@ -317,6 +340,20 @@ function detaljer() {
  for (var x in statestikk_s.liste_menn){
    let li = document.createElement("li")
    let text = document.createTextNode(statestikk_s.liste_menn[x].aarstall +": Antall sysselsatte: "+ statestikk_s.liste_menn[x].antall_sysselsatte.toFixed(0)+" Prosent sysselsatte: "+statestikk_s.liste_menn[x].pro_sysselsatt)
+   li.appendChild(text)
+   ul_menn.appendChild(li)
+ }
+
+ for (var x in høy_ut.liste_menn_kort){
+   let li = document.createElement("li")
+   let text = document.createTextNode(høy_ut.liste_menn_kort[x].aarstall +": Antall utdanning kort: "+ høy_ut.liste_menn_kort[x].antall_utdanning.toFixed(0)+" Prosent utdanning kort: "+høy_ut.liste_menn_kort[x].pro_utdanning)
+   li.appendChild(text)
+   ul_menn.appendChild(li)
+ }
+
+ for (var x in høy_ut.liste_menn_lang){
+   let li = document.createElement("li")
+   let text = document.createTextNode(høy_ut.liste_menn_lang[x].aarstall +": Antall utdanning lang: "+ høy_ut.liste_menn_lang[x].antall_utdanning.toFixed(0)+" Prosent utdanning lang: "+høy_ut.liste_menn_lang[x].pro_utdanning)
    li.appendChild(text)
    ul_menn.appendChild(li)
  }
