@@ -106,6 +106,31 @@
   margin-top: 10px;
 }
 
+#oversikt_kommune {
+  display: flex;
+  flex-direction: row;
+}
+
+#kategori_kvinner {
+  display: flex;
+  flex-direction: row;
+}
+
+#kategori_menn {
+  display: flex;
+  flex-direction: row;
+}
+
+#tabell_kvinner {
+  display: flex;
+  flex-direction: row;
+}
+
+#tabell_menn {
+  display: flex;
+  flex-direction: row;
+}
+
 #page-container {
   position: relative;
   min-height: 100vh;

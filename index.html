@@ -17,7 +17,10 @@
 
 <div id="introduksjon">
   <div class="box">
-  <p>Her står en beskrivelse av oppgaven</p></div>
+  <p>På disse sidene kan du finne statistikk for sysselsatte, høyere utdanning og befolkning i alle kommuner i Norge.</p>
+  <p>På "Oversikt" vises alle kommunene med navn, kommunenummer, og siste måling av befolkning.</p>
+  <p>På "Detaljer" kan du selv velge kommunenummer for å finne kommunens navn, siste målte befolkning, siste målte statistikk for sysselsetting og høyere utdanning<br> (i antall og prosent).</p>
+  <p>På "Sammenligning" kan du selv velge kommunenummer for å sammenligne statistikk for sysselsetting hos kvinner og menn mellom to kommuner.</p></div>
   <div class="box">
     <p>Her kan du finne alle lenkene som er brukt til oppgaven:</p>
   <a href="http://data.ssb.no/api/v0/dataset/104857?lang=no"> Befolkning</a></br>
@@ -49,18 +52,23 @@
 
 <div id="sammenligning">
   <h3>Sammenligning</h3>
-  <input id="kommune_1">
-  <input id="kommune_2">
+  <input id="kommune_1" value="0101">
+  <input id="kommune_2" value="0104">
   <button onclick="sammenligning()">Sammenlign</button>
   <h3>Historisk data for utvikling av sysselsatte</h3>
+  <div id="oversikt_kommune">
   <h2 id="navn_kommune"></h2>
-  <h2 id="navn_kommune_to"></h2>
-  <h4>Kvinner</h4>
-  <ul id="sammen_kvinner"></ul>
-  <ul id="sammen_kvinner_to"></ul>
-  <h4>Menn</h4>
-  <ul id="sammen_menn"></ul>
-  <ul id="sammen_menn_to"></ul>
+  <h2 id="navn_kommune_to"></h2></div>
+  <div id="kategori_kvinner">
+    <h4>Kvinner</h4></div>
+    <div id="tabell_kvinner">
+    <ul id="sammen_kvinner"></ul>
+    <ul id="sammen_kvinner_to"></ul></div>
+    <div id="kategori_menn">
+    <h4>Menn</h4></div>
+    <div id="tabell_menn">
+    <ul id="sammen_menn"></ul>
+    <ul id="sammen_menn_to"></ul></div>
 </div>
 
 <div id="page-container">
