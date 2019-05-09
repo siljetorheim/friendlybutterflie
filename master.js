@@ -372,6 +372,10 @@ try {
     document.getElementById("sammen_menn").innerHTML= ""
     document.getElementById("sammen_kvinner_to").innerHTML= ""
     document.getElementById("sammen_menn_to").innerHTML= ""
+    document.getElementById("navn_kommune").innerHTML = ""
+    document.getElementById("navn_kommune_to").innerHTML= ""
+    document.getElementById("navn_kommune_tre").innerHTML= ""
+    document.getElementById("navn_kommune_fire").innerHTML= ""
 
    const kommunenummer = hent_detj_kommune("kommune_1") //Må legge inn conditional statement for å forhindre ugyldig kommunenr og tekstverdi
    const kommunenummer_to = hent_detj_kommune("kommune_2")
@@ -382,62 +386,62 @@ try {
    let ul_kvinner_to = document.getElementById("sammen_kvinner_to");
    let ul_menn = document.getElementById("sammen_menn");
    let ul_menn_to = document.getElementById("sammen_menn_to");
-   let liste_1 = [];
-   let l01 = [];
-   let liste_2 = [];
-   let l02 = [];
-   let liste_3 = [];
-   let l03 = [];
-   let liste_4 = [];
-   let l04 = [];
+   let l01 = [0];
+   let l02 = [0];
+   let l03 = [0];
+   let l04 = [0];
    let vekst_kvinner = [];
 
-   for (var x in statestikk_s.liste_kvinner){
+    //Regner ut prosentvekst
+    for (var i = 0; i < statestikk_s.liste_kvinner.length-1; i++) {
+      l01.push(statestikk_s.liste_kvinner[i+1].pro_sysselsatt - statestikk_s.liste_kvinner[i].pro_sysselsatt)
+    }
+
+    for (var i = 0; i < statestikk_syssel.liste_kvinner.length-1; i++) {
+      l02.push(statestikk_syssel.liste_kvinner[i+1].pro_sysselsatt-statestikk_syssel.liste_kvinner[i].pro_sysselsatt)
+    }
+
+    for (var i = 0; i < statestikk_s.liste_menn.length-1; i++) {
+      l03.push(statestikk_s.liste_menn[i+1].pro_sysselsatt-statestikk_s.liste_menn[i].pro_sysselsatt)
+    }
+
+    for (var i = 0; i < statestikk_syssel.liste_menn.length-1; i++) {
+      l04.push(statestikk_syssel.liste_menn[i+1].pro_sysselsatt-statestikk_syssel.liste_menn[i].pro_sysselsatt)
+    }
+
+   for (var x = 0; x < statestikk_s.liste_kvinner.length; x++){
      let li = document.createElement("li")
      let text = document.createTextNode(statestikk_s.liste_kvinner[x].aarstall +" Prosent sysselsatte: "+statestikk_s.liste_kvinner[x].pro_sysselsatt)
      li.appendChild(text)
+     if (l01[x] != l02[x]) li.style.color = (l01[x] > l02[x]) ? "green" : ""
+     if (l01[x] != 0) li.innerHTML += (l01[x] > 0) ? " &#x2191;" : " &#x2193;"
      ul_kvinner.appendChild(li)
-     liste_1.push(statestikk_s.liste_kvinner[x].pro_sysselsatt)
    }
 
-   for (var x in statestikk_s.liste_menn){
+   for (var x = 0; x < statestikk_s.liste_menn.length; x++){
      let li = document.createElement("li")
      let text = document.createTextNode(statestikk_s.liste_menn[x].aarstall +" Prosent sysselsatte: "+statestikk_s.liste_menn[x].pro_sysselsatt)
      li.appendChild(text)
+     if (l03[x] != l04[x]) li.style.color = (l03[x] > l04[x]) ? "green" : ""
+     if (l03[x] != 0) li.innerHTML += (l03[x] > 0) ? " &#x2191;" : " &#x2193;"
      ul_menn.appendChild(li)
-     liste_3.push(statestikk_s.liste_menn[x].pro_sysselsatt)
    }
 
-   for (var x in statestikk_syssel.liste_kvinner){
+   for (var x = 0; x < statestikk_syssel.liste_kvinner.length; x++){
      let li = document.createElement("li")
      let text = document.createTextNode(statestikk_syssel.liste_kvinner[x].aarstall +" Prosent sysselsatte: "+statestikk_syssel.liste_kvinner[x].pro_sysselsatt)
      li.appendChild(text)
+     if (l01[x] != l02[x]) li.style.color = (l01[x] < l02[x]) ? "green" : ""
+     if (l02[x] != 0) li.innerHTML += (l02[x] > 0) ? " &#x2191;" : " &#x2193;"
      ul_kvinner_to.appendChild(li)
-     liste_2.push(statestikk_syssel.liste_kvinner[x].pro_sysselsatt)
    }
-   for (var x in statestikk_syssel.liste_menn){
+   for (var x = 0; x < statestikk_syssel.liste_menn.length; x++){
      let li = document.createElement("li")
      let text = document.createTextNode(statestikk_syssel.liste_menn[x].aarstall +" Prosent sysselsatte: "+statestikk_syssel.liste_menn[x].pro_sysselsatt)
      li.appendChild(text)
+     if (l03[x] != l04[x]) li.style.color = (l03[x] < l04[x]) ? "green" : ""
+     if (l04[x] != 0) li.innerHTML += (l04[x] > 0) ? " &#x2191;" : " &#x2193;"
      ul_menn_to.appendChild(li)
-     liste_4.push(statestikk_syssel.liste_menn[x].pro_sysselsatt)
-   }
-
-  //Regner ut prosentvekst
-   for (var i = 0; i < liste_1.length-1; i++) {
-     l01.push(liste_1[i+1]-liste_1[i])
-   }
-
-   for (var i = 0; i < liste_2.length-1; i++) {
-     l02.push(liste_2[i+1]-liste_2[i])
-   }
-
-   for (var i = 0; i < liste_3.length-1; i++) {
-     l03.push(liste_3[i+1]-liste_3[i])
-   }
-
-   for (var i = 0; i < liste_4.length-1; i++) {
-     l04.push(liste_4[i+1]-liste_4[i])
    }
 
    console.log(l01);
