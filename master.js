@@ -53,6 +53,7 @@ function getNames(data) {
 function getNameKommune(data, kommunenr) {
   for (kommune in data.elementer) {
     if (data.elementer[kommune].kommunenummer == kommunenr) {
+
       return kommune
     }
   }
@@ -64,6 +65,7 @@ function getIDs(data){
     for (kommune in data.elementer) {
       kommunenumre.push(data.elementer[kommune].kommunenummer);
     }
+
     return kommunenumre;
 
 }
@@ -269,7 +271,7 @@ function detaljer() {
  sisteAaret.appendChild(linummer)
 
 //Siste måling befolkning
- let siste_mål = siste_måling_spes(kommunenummer)
+ let siste_mål = siste_måling(kommunenummer)
  let lisismål = document.createElement("li")
  let textsismål = document.createTextNode("Siste måling befolkning: " + siste_mål)
  lisismål.appendChild(textsismål)
