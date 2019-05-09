@@ -95,7 +95,7 @@ try {
 
   var befolkning = new Grensesnitt(befolkning_2, function(){sysselsatte.load()})
   var utdanning = new Grensesnitt(utdanning_2, function(){program()})
-  var sysselsatte = new Grensesnitt(sysselsatte_2, function(){utdanning.load()})
+  var sysselsatte = new Grensesnitt(sysselsatte_2, function(){utdanning.load(), console.log("done")})
   befolkning.load()
 
   function program(){
