@@ -423,19 +423,19 @@ try {
 
   //Regner ut prosentvekst
    for (var i = 0; i < liste_1.length-1; i++) {
-     l01.push(liste_1[i]-liste_1[i+1])
+     l01.push(liste_1[i+1]-liste_1[i])
    }
 
    for (var i = 0; i < liste_2.length-1; i++) {
-     l02.push(liste_2[i]-liste_2[i+1])
+     l02.push(liste_2[i+1]-liste_2[i])
    }
 
    for (var i = 0; i < liste_3.length-1; i++) {
-     l03.push(liste_3[i]-liste_3[i+1])
+     l03.push(liste_3[i+1]-liste_3[i])
    }
 
    for (var i = 0; i < liste_4.length-1; i++) {
-     l04.push(liste_4[i]-liste_4[i+1])
+     l04.push(liste_4[i+1]-liste_4[i])
    }
 
    console.log(l01);
