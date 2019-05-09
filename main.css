@@ -106,6 +106,15 @@
   margin-top: 10px;
 }
 
+#kommune_kjønn {
+  display: flex;
+  flex-direction: row;
+}
+#historisk_data {
+  display: flex;
+  flex-direction: row;
+}
+
 #page-container {
   position: relative;
   min-height: 100vh;

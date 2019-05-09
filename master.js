@@ -322,24 +322,32 @@ function sammenligning() {
  let ul_kvinner_to = document.getElementById("sammen_kvinner_to");
  let ul_menn = document.getElementById("sammen_menn");
  let ul_menn_to = document.getElementById("sammen_menn_to");
+ let liste_1 = [];
+ let l01 = [];
+ let liste_2 = [];
+ let l02 = [];
 
  for (var x in statestikk_s.liste_kvinner){
    let li = document.createElement("li")
    let text = document.createTextNode(statestikk_s.liste_kvinner[x].aarstall +" Prosent sysselsatte: "+statestikk_s.liste_kvinner[x].pro_sysselsatt)
    li.appendChild(text)
    ul_kvinner.appendChild(li)
+   liste_1.push(statestikk_s.liste_kvinner[x].pro_sysselsatt.toFixed(0))
  }
+
  for (var x in statestikk_s.liste_menn){
    let li = document.createElement("li")
    let text = document.createTextNode(statestikk_s.liste_menn[x].aarstall +" Prosent sysselsatte: "+statestikk_s.liste_menn[x].pro_sysselsatt)
    li.appendChild(text)
    ul_menn.appendChild(li)
  }
+
  for (var x in statestikk_syssel.liste_kvinner){
    let li = document.createElement("li")
    let text = document.createTextNode(statestikk_syssel.liste_kvinner[x].aarstall +" Prosent sysselsatte: "+statestikk_syssel.liste_kvinner[x].pro_sysselsatt)
    li.appendChild(text)
    ul_kvinner_to.appendChild(li)
+   liste_2.push(statestikk_syssel.liste_kvinner[x].pro_sysselsatt.toFixed(0))
  }
  for (var x in statestikk_syssel.liste_menn){
    let li = document.createElement("li")
@@ -348,14 +356,25 @@ function sammenligning() {
    ul_menn_to.appendChild(li)
  }
 
+//Regner ut prosentvekst
+ for (var i = 0; i < liste_1.length-1; i++) {
+   l01.push(liste_1[i]-liste_1[i+1])
+ }
+
+ for (var i = 0; i < liste_2.length-1; i++) {
+   l02.push(liste_2[i]-liste_2[i+1])
+ }
+ console.log(l01);
+ console.log(l02);
+
+ //Kommunenavn
  let navn_kommune = document.getElementById("navn_kommune");
  let navn_kommune_to = document.getElementById("navn_kommune_to")
 
-//Kommunenavn
  let kommunenavn = getNameKommune(befolkning.datasett, kommunenummer)
  let kommunenavn_to = getNameKommune(befolkning.datasett, kommunenummer_to)
- let linavn = document.createElement("row")
- let linavn_to = document.createElement("row")
+ let linavn = document.createElement("li")
+ let linavn_to = document.createElement("li")
  let textnavn = document.createTextNode(kommunenavn)
  let textnavn_to = document.createTextNode(kommunenavn_to)
  linavn.appendChild(textnavn)
