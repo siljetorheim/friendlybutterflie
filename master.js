@@ -435,5 +435,5 @@ try {
 }
 
 catch(err) {
-  document.getElementByID("error").innerHTML = err.message;
+  document.getElementById("error").innerHTML = err.message;
 }
