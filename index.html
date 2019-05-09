@@ -51,24 +51,31 @@
 </div>
 
 <div id="sammenligning">
-  <h3>Sammenligning</h3>
-  <input id="kommune_1" value="0101">
-  <input id="kommune_2" value="0104">
-  <button onclick="sammenligning()">Sammenlign</button>
-  <h3>Historisk data for utvikling av sysselsatte</h3>
-  <div id="oversikt_kommune">
-  <h2 id="navn_kommune"></h2>
-  <h2 id="navn_kommune_to"></h2></div>
-  <div id="kategori_kvinner">
-    <h4>Kvinner</h4></div>
-    <div id="tabell_kvinner">
-    <ul id="sammen_kvinner"></ul>
-    <ul id="sammen_kvinner_to"></ul></div>
-    <div id="kategori_menn">
-    <h4>Menn</h4></div>
-    <div id="tabell_menn">
-    <ul id="sammen_menn"></ul>
-    <ul id="sammen_menn_to"></ul></div>
+  <div class="topp_valg">
+    <h1>Sammenligning</h1>
+    <input id="kommune_1" value="0101" class="input">
+    <input id="kommune_2" value="0104" class="input">
+    <button onclick="sammenligning()">Sammenlign</button>
+  </div>
+  <h3>Historisk data for utvikling av sysselsatte:</h3>
+  <div id="kategori_kvinner" class="navigasjon">
+    <h2>Kvinner</h2>
+  </div>
+    <div id="tabell_kvinner" class="navigasjon">
+      <h3 id="navn_kommune"></h3>
+      <ul id="sammen_kvinner"></ul>
+      <h3 id="navn_kommune_to"></h3>
+      <ul id="sammen_kvinner_to"></ul>
+    </div>
+    <div id="kategori_menn" class="navigasjon">
+      <h2>Menn</h2>
+    </div>
+    <div id="tabell_menn"class="navigasjon">
+      <h3 id="navn_kommune_tre"></h3>
+      <ul id="sammen_menn"></ul>
+      <h3 id="navn_kommune_fire"></h3>
+      <ul id="sammen_menn_to"></ul>
+    </div>
 </div>
 
 <div id="page-container">
@@ -76,6 +83,8 @@
   <footer id="footer">
     <h4 class="text_footer">Oppgavebesvarelse INFO134</h4>
   </footer></div></div>
+
+<p id="error"></p>
 
 </body>
 </html>

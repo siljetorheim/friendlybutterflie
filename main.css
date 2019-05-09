@@ -92,14 +92,14 @@
 
 #kommune_1 {
   background-color: white;
-  width: 400px;
+  width: 270px;
   height: flex;
   border: 1px solid black;
   padding: 5px;
 }
 #kommune_2 {
   background-color: white;
-  width: 400px;
+  width: 270px;
   height: flex;
   border: 1px solid black;
   padding: 5px;
@@ -159,4 +159,22 @@
 
 .hide{
   display: none;
+}
+
+.navigasjon {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
+@media all and (max-width: 800px) {
+  .navigasjon {
+    flex-direction: column;
+  }
+}
+
+@media all and (max-width: 500px) {
+  .navigasjon {
+    flex-direction: column;
+  }
 }
