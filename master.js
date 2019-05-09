@@ -309,6 +309,10 @@ try {
    let ul_kjønn = document.getElementById("ul_kjønn");
    let ul_kvinner = document.getElementById("ul_kvinner");
    let ul_menn = document.getElementById("ul_menn");
+   let ul_kvinner_utdanning_kort = document.getElementById("ul_kvinner_utdanning_kort");
+   let ul_kvinner_utdanning = document.getElementById("ul_kvinner_utdanning_kort");
+   let ul_menn_utdanning_kort = document.getElementById("ul_menn_utdanning_kort");
+   let ul_menn_utdanning_lang = document.getElementById("ul_menn_utdanning_lang");
 
    for (var x in statestikk_s.liste_beggekjønn){
      let li = document.createElement("li")
@@ -316,8 +320,6 @@ try {
      li.appendChild(text)
      ul_kjønn.appendChild(li)
    }
-
-
 
    for (var x in statestikk_s.liste_kvinner){
      let li = document.createElement("li")
@@ -330,14 +332,14 @@ try {
      let li = document.createElement("li")
      let text = document.createTextNode(høy_ut.liste_kvinner_kort[x].aarstall +": Antall utdanning kort: "+ høy_ut.liste_kvinner_kort[x].antall_utdanning.toFixed(0)+" Prosent utdanning kort: "+høy_ut.liste_kvinner_kort[x].pro_utdanning)
      li.appendChild(text)
-     ul_kvinner.appendChild(li)
+     ul_kvinner_utdanning_kort.appendChild(li)
    }
 
    for (var x in høy_ut.liste_kvinner_lang){
      let li = document.createElement("li")
      let text = document.createTextNode(høy_ut.liste_kvinner_lang[x].aarstall +": Antall utdanning lang: "+ høy_ut.liste_kvinner_lang[x].antall_utdanning.toFixed(0)+" Prosent utdanning lang: "+høy_ut.liste_kvinner_lang[x].pro_utdanning)
      li.appendChild(text)
-     ul_kvinner.appendChild(li)
+     ul_kvinner_utdanning_lang.appendChild(li)
    }
 
    for (var x in statestikk_s.liste_menn){
@@ -351,14 +353,14 @@ try {
      let li = document.createElement("li")
      let text = document.createTextNode(høy_ut.liste_menn_kort[x].aarstall +": Antall utdanning kort: "+ høy_ut.liste_menn_kort[x].antall_utdanning.toFixed(0)+" Prosent utdanning kort: "+høy_ut.liste_menn_kort[x].pro_utdanning)
      li.appendChild(text)
-     ul_menn.appendChild(li)
+     ul_menn_utdanning_kort.appendChild(li)
    }
 
    for (var x in høy_ut.liste_menn_lang){
      let li = document.createElement("li")
      let text = document.createTextNode(høy_ut.liste_menn_lang[x].aarstall +": Antall utdanning lang: "+ høy_ut.liste_menn_lang[x].antall_utdanning.toFixed(0)+" Prosent utdanning lang: "+høy_ut.liste_menn_lang[x].pro_utdanning)
      li.appendChild(text)
-     ul_menn.appendChild(li)
+     ul_menn_utdanning_lang.appendChild(li)
    }
 
   }
@@ -423,19 +425,19 @@ try {
 
   //Regner ut prosentvekst
    for (var i = 0; i < liste_1.length-1; i++) {
-     l01.push(liste_1[i]-liste_1[i+1])
+     l01.push(liste_1[i+1]-liste_1[i])
    }
 
    for (var i = 0; i < liste_2.length-1; i++) {
-     l02.push(liste_2[i]-liste_2[i+1])
+     l02.push(liste_2[i+1]-liste_2[i])
    }
 
    for (var i = 0; i < liste_3.length-1; i++) {
-     l03.push(liste_3[i]-liste_3[i+1])
+     l03.push(liste_3[i+1]-liste_3[i])
    }
 
    for (var i = 0; i < liste_4.length-1; i++) {
-     l04.push(liste_4[i]-liste_4[i+1])
+     l04.push(liste_4[i+1]-liste_4[i])
    }
 
    console.log(l01);
