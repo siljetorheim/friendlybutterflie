@@ -326,6 +326,11 @@ function sammenligning() {
  let l01 = [];
  let liste_2 = [];
  let l02 = [];
+ let liste_3 = [];
+ let l03 = [];
+ let liste_4 = [];
+ let l04 = [];
+ let vekst_kvinner = [];
 
  for (var x in statestikk_s.liste_kvinner){
    let li = document.createElement("li")
@@ -340,6 +345,7 @@ function sammenligning() {
    let text = document.createTextNode(statestikk_s.liste_menn[x].aarstall +" Prosent sysselsatte: "+statestikk_s.liste_menn[x].pro_sysselsatt)
    li.appendChild(text)
    ul_menn.appendChild(li)
+   liste_3.push(statestikk_s.liste_kvinner[x].pro_sysselsatt.toFixed(0))
  }
 
  for (var x in statestikk_syssel.liste_kvinner){
@@ -354,6 +360,7 @@ function sammenligning() {
    let text = document.createTextNode(statestikk_syssel.liste_menn[x].aarstall +" Prosent sysselsatte: "+statestikk_syssel.liste_menn[x].pro_sysselsatt)
    li.appendChild(text)
    ul_menn_to.appendChild(li)
+   liste_4.push(statestikk_s.liste_kvinner[x].pro_sysselsatt.toFixed(0))
  }
 
 //Regner ut prosentvekst
@@ -364,9 +371,29 @@ function sammenligning() {
  for (var i = 0; i < liste_2.length-1; i++) {
    l02.push(liste_2[i]-liste_2[i+1])
  }
+
+ for (var i = 0; i < liste_3.length-1; i++) {
+   l03.push(liste_3[i]-liste_3[i+1])
+ }
+
+ for (var i = 0; i < liste_4.length-1; i++) {
+   l04.push(liste_4[i]-liste_4[i+1])
+ }
+
+ for (var i = 0; i < l01.length-3; i++) {
+   if (l01[i] < l02[i]) {
+     vekst_kvinner.push("Lavere")
+   }
+   if (l01[i] === l02[i]) {
+     vekst_kvinner.push("Lik")
+   }
+   vekst_kvinner.push("Høyere")
+ }
  console.log(l01);
  console.log(l02);
-
+ console.log(l03);
+ console.log(l04);
+ console.log(vekst_kvinner);
  //Kommunenavn
  let navn_kommune = document.getElementById("navn_kommune");
  let navn_kommune_to = document.getElementById("navn_kommune_to")

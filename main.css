@@ -106,11 +106,27 @@
   margin-top: 10px;
 }
 
-#kommune_kjønn {
+#oversikt_kommune {
   display: flex;
   flex-direction: row;
 }
-#historisk_data {
+
+#kategori_kvinner {
+  display: flex;
+  flex-direction: row;
+}
+
+#kategori_menn {
+  display: flex;
+  flex-direction: row;
+}
+
+#tabell_kvinner {
+  display: flex;
+  flex-direction: row;
+}
+
+#tabell_menn {
   display: flex;
   flex-direction: row;
 }
