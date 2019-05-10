@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="main.css">
   <script type="text/javascript" src="master.js"></script>
+  <title>Semesteroppgave INFO134</title>
 </head>
 <body class="body" onload="hide(0);">
 
@@ -40,55 +41,81 @@
   <h3>Detaljer</h3>
   <input id="kommune">
   <button onclick="detaljer()">Hent detaljer</button>
+  <div id="kommuneErrorMessage" class="error hide">Vennligst legg inn et gyldig kommunenummer</div>
   <ul id="siste_aaret"></ul>
   <h3>Historisk data</h3>
-  <h4>Begge kjønn</h4>
-  <ul id="ul_kjønn"></ul>
-  <h4>Kvinner</h4>
-  <ul id="ul_kvinner"></ul>
-  <ul id="ul_kvinner_utdanning_kort"></ul>
-  <ul id="ul_kvinner_utdanning_lang"></ul>
-  <h4>Menn</h4>
-  <ul id="ul_menn"></ul>
-  <ul id="ul_menn_utdanning_kort"></ul>
-  <ul id="ul_menn_utdanning_lang"></ul>
+  <p>Her viser antall sysselsatte, prosent av sysselsatte, antall med kort høyereutdanning, prosent med kort høyereutdanning, antall med lang høyereutdanning og prosent med lang høyereutdanning. </p>
+  <div class="row_detaljer">
+    <div class="column_detaljer">
+      <h4>Begge kjønn</h4>
+      <ul id="ul_kjønn"></ul></div>
+    <div class="column_detaljer">
+      <h4>Kvinner</h4>
+      <ul id="ul_kvinner"></ul>
+      <ul id="ul_kvinner_utdanning_kort"></ul>
+      <ul id="ul_kvinner_utdanning_lang"></ul>
+    </div>
+    <div class="column_detaljer">
+      <h4>Menn</h4></div>
+      <ul id="ul_menn"></ul>
+      <ul id="ul_menn_utdanning_kort"></ul>
+      <ul id="ul_menn_utdanning_lang"></ul>
+    </div>
+  </div>
 </div>
 
 <div id="sammenligning">
-  <div class="topp_valg">
+  <div>
     <h1>Sammenligning</h1>
     <input id="kommune_1" class="input">
     <input id="kommune_2" class="input">
     <button onclick="sammenligning()">Sammenlign</button>
   </div>
   <h3>Historisk data for utvikling av sysselsatte:</h3>
-  <div id="kategori_kvinner" class="navigasjon">
-    <h2>Kvinner</h2>
+  <div class="row_sammenligning">
+      <div class="column_sammenligning">
+        <div><h2 id="navn_kommune"></h2>
+          <div><h3>Kvinner</h3>
+              <div><ul id="sammen_kvinner"></ul>
+              </div>
+          </div>
+      </div>
+    </div>
+      <div class="column_sammenligning">
+        <div><h2 id="navn_kommune_to"></h2>
+          <div><h3>Kvinner</h3>
+            <div><ul id="sammen_kvinner_to"></ul>
+            </div>
+        </div>
+      </div>
+    </div>
+      <div class="column_sammenligning">
+        <div><h2 id="navn_kommune_tre"></h2>
+          <div><h3>Menn</h3>
+            <div><ul id="sammen_menn"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column_sammenligning">
+        <div><h2 id="navn_kommune_fire"></h2>
+          <div><h3>Menn</h3>
+            <div><ul id="sammen_menn_to"></ul>
+            </div>
+        </div>
+      </div>
+    </div>
   </div>
-    <div id="tabell_kvinner" class="navigasjon">
-      <h3 id="navn_kommune"></h3>
-      <ul id="sammen_kvinner"></ul>
-      <h3 id="navn_kommune_to"></h3>
-      <ul id="sammen_kvinner_to"></ul>
-    </div>
-    <div id="kategori_menn" class="navigasjon">
-      <h2>Menn</h2>
-    </div>
-    <div id="tabell_menn"class="navigasjon">
-      <h3 id="navn_kommune_tre"></h3>
-      <ul id="sammen_menn"></ul>
-      <h3 id="navn_kommune_fire"></h3>
-      <ul id="sammen_menn_to"></ul>
-    </div>
 </div>
+
 
 <div id="page-container">
   <div id="content-wrap">
-  <footer id="footer">
+    <footer id="footer">
     <h4 class="text_footer">Oppgavebesvarelse INFO134</h4>
-  </footer></div></div>
-
-<p id="error"></p>
+    </footer>
+  </div>
+</div>
 
 </body>
 </html>

@@ -10,6 +10,10 @@
   display: none;
 }
 
+.error {
+  color: red;
+}
+
 .topnav {
   overflow: hidden;
   background-color: #333;
@@ -111,25 +115,6 @@
   flex-direction: row;
 }
 
-#kategori_kvinner {
-  display: flex;
-  flex-direction: row;
-}
-
-#kategori_menn {
-  display: flex;
-  flex-direction: row;
-}
-
-#tabell_kvinner {
-  display: flex;
-  flex-direction: row;
-}
-
-#tabell_menn {
-  display: flex;
-  flex-direction: row;
-}
 
 #page-container {
   position: relative;
@@ -139,7 +124,7 @@
 #content-wrap {
   padding-bottom: 2.5rem;
 }
-/* NOTE: Footer */
+
 #footer {
   background: #333;
   position: absolute;
@@ -157,24 +142,44 @@
   color: white;
 }
 
-.hide{
-  display: none;
+.column_detaljer {
+  float: left;
+  width: 33%
+
 }
 
-.navigasjon {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-evenly;
+.row_detaljer:after {
+  content: "";
+  display: table;
+  clear:both;
 }
 
-@media all and (max-width: 800px) {
-  .navigasjon {
-    flex-direction: column;
+
+@media screen and (max-width: 1200px) {
+  .column_detaljer {
+    width: 100%;
   }
 }
 
-@media all and (max-width: 500px) {
-  .navigasjon {
-    flex-direction: column;
+.column_sammenligning {
+  float: left;
+  width: 25%;
+}
+
+row_sammenligning:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 1200px) {
+  .column_sammenligning {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .column_sammenligning {
+    width: 100%;
   }
 }
